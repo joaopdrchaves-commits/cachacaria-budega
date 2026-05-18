@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap');
+
+:root {
+  --wood-dark:  #3b1a09;
+  --wood-mid:   #5c2c0e;
+  --wood-light: #7a3e18;
+  --gold:       #c8a44a;
+  --gold-light: #e2c97e;
+  --gold-dim:   #9a7930;
+  --cream:      #f5e9c8;
+  --cream-dim:  #e8d9a8;
+  --radius:     6px;
+  --nav-h:      64px;
+
+  --font-title: 'Cinzel', serif;
+  --font-label: 'Josefin Sans', sans-serif;
+  --font-body:  'Lato', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; width: 100%; }
+
+body {
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  background: #1e0a02;
+  overflow-x: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+
+.page-bg {
+  min-height: 100vh;
+  padding-top: var(--nav-h);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(135deg, #1e0a02 0%, #3b1408 35%, #1e0a02 100%);
+}
+
+.wood-card {
+  position: relative;
+  border: 2px solid rgba(200, 164, 74, 0.3);
+  border-radius: 12px;
+  box-shadow:
+    0 12px 60px rgba(0,0,0,.6),
+    inset 0 1px 0 rgba(255,255,255,.08),
+    inset 0 -1px 0 rgba(0,0,0,.2);
+  overflow: hidden;
+  background-color: #4a1f08;
+  background-image:
+    repeating-linear-gradient(
+      108deg,
+      transparent 0px,
+      transparent 8px,
+      rgba(0,0,0,.06) 8px,
+      rgba(0,0,0,.06) 9px,
+      transparent 9px,
+      transparent 18px,
+      rgba(255,255,255,.025) 18px,
+      rgba(255,255,255,.025) 19px
+    ),
+    repeating-linear-gradient(
+      96deg,
+      transparent 0px,
+      transparent 22px,
+      rgba(0,0,0,.04) 22px,
+      rgba(0,0,0,.04) 24px
+    ),
+    linear-gradient(
+      170deg,
+      #6b2f0e 0%,
+      #3b1a09 25%,
+      #5c2410 50%,
+      #3b1a09 75%,
+      #4e2009 100%
+    );
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, #a89030 0%, #c8a44a 50%, #9a7930 100%);
+  color: var(--wood-dark);
+  border: none;
+  border-radius: var(--radius);
+  font-family: var(--font-title);
+  font-size: 1rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(0,0,0,.3);
+  transition: filter .2s, transform .15s;
+
+  &:hover:not(:disabled) { filter: brightness(1.1); transform: translateY(-1px); }
+  &:disabled { opacity: .55; cursor: not-allowed; transform: none; }
+}
+
+.btn-cream {
+  background: rgba(245,233,200,.15);
+  color: var(--cream);
+  border: 1.5px solid rgba(200,164,74,.4);
+  border-radius: var(--radius);
+  font-family: var(--font-label);
+  font-size: .85rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 8px 18px;
+  transition: background .2s, border-color .2s;
+
+  &:hover { background: rgba(245,233,200,.25); border-color: var(--gold); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

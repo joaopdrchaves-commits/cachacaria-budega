@@ -1,0 +1,45 @@
+<app-navbar mode="client" />
+
+<div class="page-bg">
+  <div class="lista-card wood-card">
+
+    <h1 class="page-title">Produtos</h1>
+
+    <div class="cards-grid">
+      @for (p of paginados(); track p.id) {
+        <div class="prod-card">
+          <div class="prod-img">
+            @if (p.imagem) {
+              <img [src]="p.imagem" [alt]="p.nome" class="produto-foto" />
+            } @else {
+              <span class="img-fallback">🍶</span>
+            }
+          </div>
+          <div class="prod-info">
+            <h3 class="prod-nome">{{ p.nome }}</h3>
+            <p class="prod-meta">{{ p.madeira }}</p>
+            <p class="prod-preco">{{ formatCurrency(p.preco) }}</p>
+            <a [routerLink]="['/produtos', p.id]" class="btn-info">+ INFO</a>
+            <button class="btn-carrinho" (click)="adicionarCarrinho(p.id)">
+              Adicionar ao Carrinho
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="lista-footer">
+      <span class="info-text">
+        Mostrando {{ (currentPage()-1)*pageSize+1 }} a {{ Math.min(currentPage()*pageSize, produtos().length) }} de {{ produtos().length }} produtos
+      </span>
+      <div class="pagination">
+        <button class="page-btn" (click)="goTo(currentPage()-1)" [disabled]="currentPage()===1">‹</button>
+        @for (p of pages(); track p) {
+          <button class="page-btn" [class.active]="p===currentPage()" (click)="goTo(p)">{{ p }}</button>
+        }
+        <button class="page-btn" (click)="goTo(currentPage()+1)" [disabled]="currentPage()===totalPages()">›</button>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,84 @@
+<app-navbar mode="client" />
+
+<div class="page-bg">
+  @if (produto(); as p) {
+    <div class="detalhe-card wood-card">
+
+      <div class="top-bar">
+        <a routerLink="/produtos" class="btn-voltar">‹ Voltar</a>
+        <h2 class="section-title">Detalhes do Produto</h2>
+      </div>
+
+      <div class="content">
+        <div class="img-col">
+          <div class="prod-img">
+            @if (p.imagem) {
+              <img [src]="p.imagem" [alt]="p.nome" class="produto-foto" />
+            } @else {
+              <span class="img-fallback">🍶</span>
+            }
+          </div>
+        </div>
+
+        <div class="info-col">
+          <div class="info-top">
+            <div>
+              <h1 class="prod-nome">{{ p.nome }}</h1>
+              <p class="prod-preco">{{ formatCurrency(p.preco) }}</p>
+            </div>
+            <div class="estoque-badge">
+              <span>Estoque Disponível</span>
+              <strong>{{ p.quantidade }} unidades</strong>
+            </div>
+          </div>
+
+          <hr class="divider" />
+
+          <div class="specs-grid">
+            <div class="spec-item">
+              <span class="spec-icon">🛢️</span>
+              <div>
+                <span class="spec-label">Volume</span>
+                <span class="spec-value">{{ p.volume ?? '700ml' }}</span>
+              </div>
+            </div>
+            <div class="spec-item">
+              <span class="spec-icon">🪵</span>
+              <div>
+                <span class="spec-label">Madeira</span>
+                <span class="spec-value">{{ p.madeira }}</span>
+              </div>
+            </div>
+          </div>
+
+          <hr class="divider" />
+
+          <div class="specs-grid">
+            <div class="spec-item">
+              <span class="spec-icon">💧</span>
+              <div>
+                <span class="spec-label">Teor Alcoólico</span>
+                <span class="spec-value">{{ p.teor }} Vol.</span>
+              </div>
+            </div>
+            <div class="spec-item">
+              <span class="spec-icon">📅</span>
+              <div>
+                <span class="spec-label">Envelhecimento</span>
+                <span class="spec-value">{{ p.envelhecimento }}</span>
+              </div>
+            </div>
+          </div>
+
+          <hr class="divider" />
+        </div>
+      </div>
+
+    </div>
+  } @else {
+    <div class="wood-card not-found">
+      <p>Produto não encontrado.</p>
+      <a routerLink="/produtos" class="btn-gold" style="padding:10px 24px">← Voltar aos Produtos</a>
+    </div>
+  }
+</div>

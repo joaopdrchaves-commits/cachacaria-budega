@@ -1,0 +1,155 @@
+<app-navbar mode="admin" />
+
+<div class="page-bg">
+  <div class="form-card wood-card">
+
+    <div class="form-top">
+      <a routerLink="/admin/produtos" class="btn-voltar">&#8249; Voltar</a>
+    </div>
+
+    <form (ngSubmit)="salvar()" [formGroup]="form" novalidate>
+      <div class="form-grid">
+
+        <!-- Nome -->
+        <div class="field-group" [class.field-error]="form.get('nome')?.invalid && form.get('nome')?.touched">
+          <label>Nome do Produto</label>
+          <input type="text" formControlName="nome" placeholder="Ex.: Dama da Noite" />
+          @if (form.get('nome')?.errors?.['required'] && form.get('nome')?.touched) {
+            <span class="err">Campo obrigatorio</span>
+          }
+        </div>
+
+        <!-- Valor de Custo -->
+        <div class="field-group" [class.field-error]="form.get('custo')?.invalid && form.get('custo')?.touched">
+          <label>Valor de Custo</label>
+          <input type="number" formControlName="custo" placeholder="Ex.: 50,00" />
+          @if (form.get('custo')?.errors?.['required'] && form.get('custo')?.touched) {
+            <span class="err">Campo obrigatorio</span>
+          }
+        </div>
+
+        <!-- Quantidade -->
+        <div class="field-group" [class.field-error]="form.get('quantidade')?.invalid && form.get('quantidade')?.touched">
+          <label>Quant. Estoque</label>
+          <input type="number" formControlName="quantidade" placeholder="Ex.: 25" />
+          @if (form.get('quantidade')?.errors?.['required'] && form.get('quantidade')?.touched) {
+            <span class="err">Campo obrigatorio</span>
+          }
+        </div>
+
+        <!-- Valor de Venda -->
+        <div class="field-group" [class.field-error]="form.get('preco')?.invalid && form.get('preco')?.touched">
+          <label>Valor de Venda</label>
+          <input type="number" formControlName="preco" placeholder="Ex.: 80,00" />
+          @if (form.get('preco')?.errors?.['required'] && form.get('preco')?.touched) {
+            <span class="err">Campo obrigatorio</span>
+          }
+        </div>
+
+        <!-- Madeira -->
+        <div class="field-group" [class.field-error]="form.get('madeira')?.invalid && form.get('madeira')?.touched">
+          <label>Madeira de Envelhecimento</label>
+          <input type="text" formControlName="madeira" placeholder="Ex.: Carvalho" />
+          @if (form.get('madeira')?.errors?.['required'] && form.get('madeira')?.touched) {
+            <span class="err">Campo obrigatorio</span>
+          }
+        </div>
+
+        <!-- Envelhecimento -->
+        <div class="field-group" [class.field-error]="form.get('envelhecimento')?.invalid && form.get('envelhecimento')?.touched">
+          <label>Envelhecimento</label>
+          <input type="text" formControlName="envelhecimento" placeholder="Ex.: 3 anos" />
+          @if (form.get('envelhecimento')?.errors?.['required'] && form.get('envelhecimento')?.touched) {
+            <span class="err">Campo obrigatorio</span>
+          }
+        </div>
+
+        <!-- Teor -->
+        <div class="field-group" [class.field-error]="form.get('teor')?.invalid && form.get('teor')?.touched">
+          <label>Teor Alcoolico</label>
+          <input type="text" formControlName="teor" placeholder="Ex.: 40%" />
+          @if (form.get('teor')?.errors?.['required'] && form.get('teor')?.touched) {
+            <span class="err">Campo obrigatorio</span>
+          }
+        </div>
+
+        <!-- Volume -->
+        <div class="field-group" [class.field-error]="form.get('volume')?.invalid && form.get('volume')?.touched">
+          <label>Volume (ml)</label>
+          <input type="text" formControlName="volume" placeholder="Ex.: 670ml" />
+          @if (form.get('volume')?.errors?.['required'] && form.get('volume')?.touched) {
+            <span class="err">Campo obrigatorio</span>
+          }
+        </div>
+
+        <!-- Classificacao -->
+        <div class="field-group" [class.field-error]="form.get('classificacao')?.invalid && form.get('classificacao')?.touched">
+          <label>Classificacao</label>
+          <div class="select-wrapper">
+            <select formControlName="classificacao">
+              <option value="" disabled>Selecione...</option>
+              <option value="Prata">Prata</option>
+              <option value="Ouro">Ouro</option>
+            </select>
+            <svg class="select-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          @if (form.get('classificacao')?.errors?.['required'] && form.get('classificacao')?.touched) {
+            <span class="err">Campo obrigatorio</span>
+          }
+        </div>
+
+        <!-- Imagem -->
+        <div class="field-group imagem-group">
+          <label>Imagem</label>
+
+          <input
+            id="fileInput"
+            type="file"
+            accept=".png,.jpg,.jpeg,.webp"
+            style="display:none"
+            (change)="onFileSelected($event)"
+          />
+
+          <div class="imagem-area">
+            @if (previewUrl()) {
+              <div class="preview-box">
+                <img [src]="previewUrl()" alt="Preview" class="preview-img" />
+              </div>
+            } @else {
+              <div class="preview-placeholder">
+                <span>&#128247;</span>
+                <p>Sem imagem</p>
+              </div>
+            }
+
+            <div class="imagem-actions">
+              <button type="button" class="btn-gold btn-arquivo" (click)="abrirSeletor()">
+                Selecionar Arquivo (.png)
+              </button>
+              <span class="nome-arquivo">{{ nomeArquivo() }}</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form-save">
+        <button type="submit" class="btn-gold btn-salvar" [disabled]="isSaving()">
+          @if (isSaving()) {
+            <span class="spinner"></span>
+            Salvando...
+          } @else {
+            {{ isEdit() ? 'Atualizar' : 'Salvar' }}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+              <polyline points="17 21 17 13 7 13 7 21"/>
+              <polyline points="7 3 7 8 15 8"/>
+            </svg>
+          }
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+</div>
