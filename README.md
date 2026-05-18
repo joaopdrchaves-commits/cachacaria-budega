@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Budega
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.25.
@@ -57,3 +58,7 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+=======
+# cachacaria-budega
+Este projeto consiste em uma aplicação Single Page Application (SPA) desenvolvida em Angular para a comercialização e catálogo de cachaças artesanais e premium. O objetivo é oferecer uma interface intuitiva para o consumidor, facilitando a busca por rótulos específicos e a gestão do carrinho de compras.
+>>>>>>> 771e156ee680d93d4f88cbba264b6327f4d3cf1e
